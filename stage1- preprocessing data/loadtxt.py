@@ -60,14 +60,14 @@ for m in range(50):
 #%%load the image and crop 
 image = imread('201208172_T-12-58-58_Dive_01_041.jpg')
 #plt.imshow(image)
-
 cropped = image[corrdinate[0,1]-15:corrdinate[0,1]+15,corrdinate[0,0]-15:corrdinate[0,0]+15]
+plt.imshow(cropped)
 
 
 
 
 
-#%%
-#f1 = open('test.txt','w')
+#%% write data into txt files
+#f1 = open('data.txt','w')
 #f1.write('hello boy!')
 #f1.close()
