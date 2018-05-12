@@ -1,1 +1,1 @@
-understanding the dataset of different image and clearn the data txt files
+understanding the dataset of different image and clean the data txt files
