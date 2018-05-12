@@ -60,8 +60,9 @@ for m in range(50):
 #%%load the image and crop 
 image = imread('201208172_T-12-58-58_Dive_01_041.jpg')
 #plt.imshow(image)
-cropped = image[corrdinate[0,1]-15:corrdinate[0,1]+15,corrdinate[0,0]-15:corrdinate[0,0]+15]
-plt.imshow(cropped)
+all_image = np.zeros([50,30,30,3])
+for i in range(50):
+   all_image[i,:,:,:] = image[corrdinate[i,1]-15:corrdinate[i,1]+15,corrdinate[i,0]-15:corrdinate[i,0]+15] 
 
 
 
