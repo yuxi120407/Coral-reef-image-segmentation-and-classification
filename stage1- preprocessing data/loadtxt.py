@@ -56,7 +56,18 @@ for m in range(50):
     if (new_l=="Davi"):
         label_encode[m] = 5
     if (new_l=="Ana"):
-        label_encode[m] = 6        
+        label_encode[m] = 6  
+        
+#%%open a file to write coordinate, label and the name of the image file
+with open('test.txt', 'w+') as f:
+  f.write('201208172_T-12-58-58_Dive_01_041.jpg\n')
+  f.write('x,y,label\n')
+  for i in range(50):
+      x = corrdinate[i,0]
+      y = corrdinate[i,1]
+      label = int(label_encode[i])
+      f.write('{0},{1},{2}\n'.format(x,y,label))
+    
 #%%load the image and crop 
 image = imread('201208172_T-12-58-58_Dive_01_041.jpg')
 #plt.imshow(image)
