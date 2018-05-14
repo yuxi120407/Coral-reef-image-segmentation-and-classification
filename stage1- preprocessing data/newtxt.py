@@ -25,17 +25,17 @@ def newtxt(path_txt,path_image):
          new_l = label2.replace('\"', '')
          if (new_l=="Agalg"):
              label_encode[m] = 0
-         if (new_l=="DCP"):
+         elif (new_l=="DCP"):
              label_encode[m] = 1
-         if (new_l=="ROC"):
+         elif (new_l=="ROC"):
              label_encode[m] = 2
-         if (new_l=="TWS"):
+         elif (new_l=="TWS"):
              label_encode[m] = 3
-         if (new_l=="CCA"):
+         elif (new_l=="CCA"):
              label_encode[m] = 4
-         if (new_l=="Davi"):
+         elif (new_l=="Davi"):
              label_encode[m] = 5
-         if (new_l=="Ana"):
+         elif (new_l=="Ana"):
              label_encode[m] = 6  
          else:
              label_encode[m] = 7
