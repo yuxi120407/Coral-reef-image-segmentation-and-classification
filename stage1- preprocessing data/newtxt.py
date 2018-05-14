@@ -38,6 +38,19 @@ def newtxt(path_txt,path_image):
         corrdinate[n,1] =int(int(data1[1])*true_width/original_width)
     txtfile.close()
     
+    #def newimagedata():
+image_data = np.zeros([1,30,30,3])
+read_files = glob.glob("./image/*.txt")
+#length = len(read_files)
+for name in read_files:
+    name = name.split("\\")[1]
+    name = name.split(".")[0]
+    path_txt = str('./image/')+name+str('.txt')
+    path_image = str('./image/')+name+str('.jpg')
+    new_image_data = newtxt(path_txt,path_image)
+    image_data = np.vstack((image_data,new_image_data))
+final_data = image_data[1:,:,:,:]
+    
     #read the label of each points and encode the label
     txtfile = open(path_txt)
     label_encode = np.zeros(count_points)
