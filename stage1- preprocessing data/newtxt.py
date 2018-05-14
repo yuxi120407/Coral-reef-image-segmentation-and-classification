@@ -11,6 +11,7 @@ from skimage.io import imread
 from PIL import Image
 
 def newtxt(path_txt,path_image):
+    #
     image = imread(path_image)
     true_length = image.shape[1]
     true_width = image.shape[0]
@@ -26,7 +27,7 @@ def newtxt(path_txt,path_image):
         corrdinate[n,0] =int(int(data1[0])*true_length/original_length)
         corrdinate[n,1] =int(int(data1[1])*true_width/original_width)
     label_encode = np.zeros(count_points)
-    label = txtfile.readlines()[56+count_points:6+count_points+count_points]
+    label = txtfile.readlines()[6+count_points:6+count_points+count_points]
     for m in range(count_points):
         label1 = label[m].split(",")
         label2 = label1[1]
