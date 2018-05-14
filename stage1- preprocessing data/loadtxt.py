@@ -45,22 +45,28 @@ for m in range(50):
     new_l = label2.replace('\"', '')
     if (new_l=="Agalg"):
         label_encode[m] = 0
-    if (new_l=="DCP"):
+    elif (new_l=="DCP"):
         label_encode[m] = 1
-    if (new_l=="ROC"):
+    elif (new_l=="ROC"):
         label_encode[m] = 2
-    if (new_l=="TWS"):
+    elif (new_l=="TWS"):
         label_encode[m] = 3
-    if (new_l=="CCA"):
+    elif (new_l=="CCA"):
         label_encode[m] = 4
-    if (new_l=="Davi"):
+    elif (new_l=="Davi"):
         label_encode[m] = 5
-    if (new_l=="Ana"):
-        label_encode[m] = 6  
+    elif (new_l=="Ana"):
+        label_encode[m] = 6 
+    else:
+        label_encode[m] = 7
+f.close()
         
 #%%open a file to write coordinate, label and the name of the image file
-with open('test.txt', 'w+') as f:
-  f.write('201208172_T-12-58-58_Dive_01_041.jpg\n')
+path_image = './image/201208172_T-13-51-38_Dive_01_094.jpg'
+name_image = path_image.split("/")[2] 
+name_txt = name_image.split(".")[0]
+with open(str('new/')+name_txt+str('.txt'), 'w+') as f:
+  f.write(name_image+str('\n'))
   f.write('x,y,label\n')
   for i in range(50):
       x = corrdinate[i,0]
