@@ -11,21 +11,35 @@ from skimage.io import imread
 from PIL import Image
 
 def newtxt(path_txt,path_image):
-    #
+    # load the true demension of the image
     image = imread(path_image)
     true_length = image.shape[1]
     true_width = image.shape[0]
+    
+    #read the orginal demension of the image
     txtfile = open(path_txt)
     firstline = txtfile.readlines()[0].split(",") 
     original_length = int(firstline[2])
     original_width = int(firstline[3])
+    txtfile.close()
+    
+    #read the number of the random points in the image
+    txtfile = open(path_txt)
     count_points = int(txtfile.readlines()[5])
+    txtfile.close()
+    
+    #read the corrdinate of the image
+    txtfile = open(path_txt)
     data = txtfile.readlines()[6:6+count_points]
     corrdinate = np.zeros([count_points,2],dtype = np.int)
     for n in range(count_points): 
         data1 = data[n].split(",")
         corrdinate[n,0] =int(int(data1[0])*true_length/original_length)
         corrdinate[n,1] =int(int(data1[1])*true_width/original_width)
+    txtfile.close()
+    
+    #read the label of each points and encode the label
+    txtfile = open(path_txt)
     label_encode = np.zeros(count_points)
     label = txtfile.readlines()[6+count_points:6+count_points+count_points]
     for m in range(count_points):
@@ -71,3 +85,4 @@ def newtxt(path_txt,path_image):
         elif(corrdinate[i,1]+15 >1536):
             corrdinate[i,1] =1521
         all_image[i,:,:,:] = image[corrdinate[i,1]-15:corrdinate[i,1]+15,corrdinate[i,0]-15:corrdinate[i,0]+15]
+    return all_image
