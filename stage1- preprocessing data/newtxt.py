@@ -93,14 +93,15 @@ final_data = image_data[1:,:,:,:]
             corrdinate[i,0] = 15
         elif(corrdinate[i,1]-15 <0):
             corrdinate[i,1] = 15
-        elif(corrdinate[i,0]+15 >2048):
-            corrdinate[i,0] = 2033
-        elif(corrdinate[i,1]+15 >1536):
-            corrdinate[i,1] =1521
+        elif(corrdinate[i,0]+15 >true_length):
+            corrdinate[i,0] = true_length-15
+        elif(corrdinate[i,1]+15 >true_width):
+            corrdinate[i,1] =true_width-15
         all_image[i,:,:,:] = image[corrdinate[i,1]-15:corrdinate[i,1]+15,corrdinate[i,0]-15:corrdinate[i,0]+15]
-    return all_image
+    return all_image, label_encode
 
 def newimagedata():
+    all_label = np.zeros(1)
     image_data = np.zeros([1,30,30,3])
     read_files = glob.glob("./image/*.txt")
     #length = len(read_files)
@@ -109,7 +110,9 @@ def newimagedata():
         name = name.split(".")[0]
         path_txt = str('./image/')+name+str('.txt')
         path_image = str('./image/')+name+str('.jpg')
-        new_image_data = newtxt(path_txt,path_image)
+        new_image_data,label = newtxt(path_txt,path_image)
+        all_label = np.hstack((all_label,label))
         image_data = np.vstack((image_data,new_image_data))
     final_data = image_data[1:,:,:,:]
-    return final_data
+    final_label = all_label[1:]
+    return final_data,all_label
