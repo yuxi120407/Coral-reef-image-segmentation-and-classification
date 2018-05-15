@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np 
 from skimage.io import imread
 from PIL import Image
+import glob
 
 def newtxt(path_txt,path_image):
     # load the true demension of the image
@@ -102,4 +103,4 @@ def newimagedata():
         image_data = np.vstack((image_data,new_image_data))
     final_data = image_data[1:,:,:,:]
     final_label = all_label[1:]
-    return final_data,all_label
+    return final_data,final_label
