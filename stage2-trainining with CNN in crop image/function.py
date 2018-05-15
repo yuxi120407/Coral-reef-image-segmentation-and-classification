@@ -159,8 +159,7 @@ def plot_confusion_matrix(confusionmatrix, classes,
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
 
-#%%
-#x,y = newimagedata(20,20)
+
 
 
 
