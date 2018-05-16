@@ -118,9 +118,7 @@ def create_plots(history):
     plt.ylabel('accuracy')
     plt.xlabel('epoch')
     plt.legend(['train', 'test'], loc='upper left')
-    #plt.savefig('accuracy.png')
-    #plt.clf()
-    #plt.show()
+   
     
     ax = fig.add_subplot(*[2,1,2])
     plt.plot(history.history['loss'])
