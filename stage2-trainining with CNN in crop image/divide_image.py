@@ -19,17 +19,6 @@ from crop_image_cnn import cnn_model
 model = cnn_model()
 model.summary()
 model.load_weights('./saved_models/2012images_trained_model.h5')
-
-
-
-
-
-
-
-
-
-
-
 #%%
 path_image = '201208172_T-12-58-58_Dive_01_041.jpg'
 testimage = Image.open('201208172_T-12-58-58_Dive_01_041.jpg')
@@ -53,27 +42,6 @@ for r in range(0,test_image.shape[0] - windowsize_r+1, 1):
             testimage.paste((0,255,255),[c,r,c+windowsize_c,r+windowsize_r])
         else:
             testimage.paste((0,0,255),[c,r,c+windowsize_c,r+windowsize_r])
-            
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
 #%%
 for a in range(0,7,1):
     print(a)
