@@ -107,6 +107,7 @@ def newimagedata(crop_length,crop_width):
         image_data = np.vstack((image_data,new_image_data))
     final_data = image_data[1:,:,:,:]
     final_label = all_label[1:]
+
     return final_data,final_label
 #%%
 def create_plots(history):
@@ -160,6 +161,34 @@ def plot_confusion_matrix(confusionmatrix, classes,
     plt.tight_layout()
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
+    
+    #%%
+    def cnn_model(x_train,num_classes):
+    model = Sequential()
+    model.add(Conv2D(32, (3, 3), padding='same',
+                     input_shape=x_train.shape[1:]))
+    model.add(Activation('relu'))
+    model.add(Conv2D(32, (3, 3)))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Dropout(0.25))
+    
+    model.add(Conv2D(64, (3, 3), padding='same'))
+    model.add(Activation('relu'))
+    model.add(Conv2D(64, (3, 3)))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Dropout(0.25))
+    
+    
+    
+    model.add(Flatten())
+    model.add(Dense(512))
+    model.add(Activation('relu'))
+    model.add(Dropout(0.5))
+    model.add(Dense(num_classes))
+    model.add(Activation('softmax'))
+    return model
 
 
 
