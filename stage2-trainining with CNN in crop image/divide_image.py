@@ -34,14 +34,21 @@ for r in range(0,test_image.shape[0] - windowsize_r+1, 1):
         window = window.reshape(-1,30,30,3)
         pred = model.predict(window,verbose=2)
         y_pred = np.argmax(pred,axis=1)
-        if(y_pred==4):
-            testimage.paste((0,255,0),[c,r,c+windowsize_c,r+windowsize_r])
-        elif(y_pred==6):
-            testimage.paste((255,255,0),[c,r,c+windowsize_c,r+windowsize_r])
-        elif(y_pred==7):
-            testimage.paste((0,255,255),[c,r,c+windowsize_c,r+windowsize_r])
-        else:
+        if(y_pred==0):#coral---blue
             testimage.paste((0,0,255),[c,r,c+windowsize_c,r+windowsize_r])
+        elif(y_pred==1):#DCP---slight gray
+            testimage.paste((105,105,105),[c,r,c+windowsize_c,r+windowsize_r])
+        elif(y_pred==2):#ROC---deep gray
+            testimage.paste((169,169,169),[c,r,c+windowsize_c,r+windowsize_r])
+        elif(y_pred==3):#CCA---red
+            testimage.paste((255,0,0),[c,r,c+windowsize_c,r+windowsize_r])
+        elif(y_pred==4):#Ana---green
+            testimage.paste((0,255,0),[c,r,c+windowsize_c,r+windowsize_r])
+        elif(y_pred==5):#Tws---yellow
+            testimage.paste((255,255,0),[c,r,c+windowsize_c,r+windowsize_r])
+        else:#others---black
+            testimage.paste((0,0,0),[c,r,c+windowsize_c,r+windowsize_r])
+            
 #%%
 for a in range(0,7,1):
     print(a)
