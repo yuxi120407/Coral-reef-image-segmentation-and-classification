@@ -46,25 +46,23 @@ def newtxt(path_txt,path_image,crop_length,crop_width):
     label_encode = np.zeros(count_points)
     label = txtfile.readlines()[6+count_points:6+count_points+count_points]
     for m in range(count_points):
-        label1 = label[m].split(",")
-        label2 = label1[1]
-        new_l = label2.replace('\"', '')
-        if (new_l=="Agalg"):
-            label_encode[m] = 0
-        elif (new_l=="DCP"):
-            label_encode[m] = 1
-        elif (new_l=="ROC"):
-            label_encode[m] = 2
-        elif (new_l=="TWS"):
-            label_encode[m] = 3
-        elif (new_l=="CCA"):
-            label_encode[m] = 4
-        elif (new_l=="Davi"):
-            label_encode[m] = 5
-        elif (new_l=="Ana"):
-            label_encode[m] = 6  
-        else:
-            label_encode[m] = 7
+    label1 = label[m].split(",")
+    label2 = label1[1]
+    new_l = label2.replace('\"', '')
+    if ((new_l=="Agalg") or (new_l=="Aga") or (new_l=="Agalf")):
+        label_encode[m] = 0
+    elif (new_l=="DCP"):
+        label_encode[m] = 1
+    elif (new_l=="ROC"):
+        label_encode[m] = 2
+    elif (new_l=="CCA"):
+        label_encode[m] = 3
+    elif (new_l=="Ana"):
+        label_encode[m] = 4 
+    elif (new_l=="Tws"):
+        label_encode[m] = 5
+    else:
+        label_encode[m] = 6
     txtfile.close()
     name_image = path_image.split("/")[2] 
     name_txt = name_image.split(".")[0]
