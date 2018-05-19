@@ -23,7 +23,7 @@ import numpy as np
 #        horizontal_flip=True,
 #        fill_mode='nearest')
 #
-#img = load_img('data/Aga345.jpg')  # 这是一个PIL图像
+#img = load_img('data/Aga345.jpg')  
 #x = img_to_array(img)  # transfer image to numpy, the shape of it is (31, 31, 3)
 #x = x.reshape((1,) + x.shape)  # transfer shape to (1,31, 31, 3)
 #i = 0 
