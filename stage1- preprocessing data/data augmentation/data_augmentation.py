@@ -14,23 +14,23 @@ import numpy as np
 
 
 
-#datagen = ImageDataGenerator(
-#        rotation_range=40,
-#        width_shift_range=0.2,
-#        height_shift_range=0.2,
-#        shear_range=0.2,
-#        zoom_range=0.2,
-#        horizontal_flip=True,
-#        fill_mode='nearest')
-#
-#img = load_img('data/Aga345.jpg')  
-#x = img_to_array(img)  # transfer image to numpy, the shape of it is (31, 31, 3)
-#x = x.reshape((1,) + x.shape)  # transfer shape to (1,31, 31, 3)
-#i = 0 
-#for batch in datagen.flow(x,batch_size=1,save_to_dir='data',save_prefix='Aga', save_format = 'png'):
-#    i = i+1
-#    if(i>50):
-#        break
+def data_augmentation(ClassName,ImageNum):
+    className = str(ClassName)
+    imageNum = ImageNum -1
+    datagen = ImageDataGenerator(rotation_range=40,width_shift_range=0.2,height_shift_range=0.2,
+                                 shear_range=0.2,zoom_range=0.2,horizontal_flip=True,fill_mode='nearest')
+    image_files = glob.glob("./data/"+className+"/*.jpg")
+    for name in image_files:
+        name_image = name.split("\\")[1]
+        image_subidex = name_image.split('.')[0]
+        img = load_img(name)  
+        x = img_to_array(img)  # transfer image to numpy, the shape of it is (31, 31, 3)
+        x = x.reshape((1,) + x.shape)  # transfer shape to (1,31, 31, 3)
+        i = 0 
+        for batch in datagen.flow(x,batch_size=1,save_to_dir="data/"+className,save_prefix=image_subidex+"-New", save_format = "jpg"):
+            i = i+1
+            if(i>imageNum):
+                break
     
     
 
