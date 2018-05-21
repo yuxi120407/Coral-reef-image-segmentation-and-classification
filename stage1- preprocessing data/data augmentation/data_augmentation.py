@@ -105,14 +105,63 @@ for name in read_files:
     image_label = np.hstack((image_label,new_label))
     final_image_data = image_data[1:,:,:,:]
     final_label = image_label[1:]
-#%%
-def shuffle(X, y):
-    Z = np.column_stack((X, y))
-    np.random.shuffle(Z)
-    return Z[:, :-1], Z[:, -1]
-    
+   
 dirs = os.listdir("./data")    
+#%%
+def transfer_im2array(ClassName):
+    className = str(ClassName)
+    image_label = np.zeros(1)
+    image_data = np.zeros([1,30,30,3])
+    read_files = glob.glob("./data/"+className+"/*.jpg")  
+    for name in read_files:
+        name_path = name.split("\\")[1]
+        name_idex = name_path.split(".")[0]
+        img_label = name_idex.split("-")[0]
+        
+        im = imread(name)
+        im = im.reshape((1,) + im.shape)  # transfer shape to (1,31, 31, 3)
+        image_data = np.vstack((image_data,im))
+        if(img_label=="Coral"):
+            new_label = 0
+        elif(img_label=="DCP"):
+            new_label = 1
+        elif(img_label=="Rock"):
+            new_label = 2
+        elif(img_label=="Red algae"):
+            new_label = 3
+        elif(img_label=="Green algae"):
+            new_label = 4 
+        else:
+            new_label = 5
+        image_label = np.hstack((image_label,new_label))
+        final_image_data = image_data[1:,:,:,:]
+        final_label = image_label[1:]
+    return final_image_data,final_label
+#%%
+def shuffle(data, label):
+    #num = data.shape[0]
+    #X = data.reshape(num,-1)
+    Z = np.column_stack((data, label))
+    np.random.shuffle(Z)
+    fully_data = Z[:,:-1]
+    shuffle_label = Z[:,-1]
+    shuffle_data = fully_data.reshape(-1,30,30,3)
+    return shuffle_data,shuffle_label
     
+#%%
+def load_augment_data():
+    data = np.zeros(2700)
+    label = np.zeros(1)
+    dirs = os.listdir("./data") 
+    for name in dirs:
+        image_data, image_label = transfer_im2array(name)
+        image_data = image_data.reshape(-1,2700)
+        data = np.vstack((data,image_data))
+        label = np.hstack((label,image_label))
+    all_data = data[1:,:]
+    all_label = label[1:]    
+    shuffle_data,shuffle_label = shuffle(all_data,all_label) 
+    return shuffle_data,shuffle_label
     
     
     
