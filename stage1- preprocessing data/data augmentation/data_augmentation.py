@@ -87,7 +87,28 @@ for name in read_files:
         path_txt = str('./2012new/')+name+str('.txt')
         path_image = str('./image/')+name+str('.jpg')
         save_crop_image(path_txt,path_image,image_subidex)
-  
+#%%
+image_label = np.zeros(1)
+image_data = np.zeros([1,30,30,3])
+read_files = glob.glob('./data/Coral/*.jpg')  
+for name in read_files:
+    name_path = name.split("\\")[1]
+    name_idex = name_path.split(".")[0]
+    img_label = name_idex.split("-")[0]
+    
+    im = imread(name)
+    im = im.reshape((1,) + im.shape)  # transfer shape to (1,31, 31, 3)
+    image_data = np.vstack((image_data,im))
+    if(img_label=="Coral"):
+        new_label = 1
+    image_label = np.hstack((image_label,new_label))
+    final_image_data = image_data[1:,:,:,:]
+    final_label = image_label[1:]
+#%%
+def shuffle(X, y):
+    Z = np.column_stack((X, y))
+    np.random.shuffle(Z)
+    return Z[:, :-1], Z[:, -1]
     
     
     
