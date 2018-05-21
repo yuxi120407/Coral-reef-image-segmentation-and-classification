@@ -11,6 +11,7 @@ from skimage.io import imread
 from PIL import Image
 import matplotlib.pyplot as plt
 import numpy as np 
+import os  
 
 
 
@@ -110,7 +111,7 @@ def shuffle(X, y):
     np.random.shuffle(Z)
     return Z[:, :-1], Z[:, -1]
     
-    
+dirs = os.listdir("./data")    
     
     
     
