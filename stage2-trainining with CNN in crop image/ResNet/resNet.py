@@ -55,8 +55,7 @@ elif version == 2:
 # Model name, depth and version
 model_type = 'ResNet%dv%d' % (depth, version)
 
-# Load the CIFAR10 data.
-#(x_train, y_train), (x_test, y_test) = cifar10.load_data()
+# Load shuffle data.
 x_train = shuffle_data[0:5000]
 x_test = shuffle_data[5000:]
 
