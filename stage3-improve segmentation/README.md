@@ -4,4 +4,6 @@ improve segmentation: data augmentation, superpixel methods
  https://zhuanlan.zhihu.com/p/22308032
  
  https://aboveintelligent.com/image-segmentation-with-neural-net-d5094d571b1e
+ 
+ weight dowload: http://www.vlfeat.org/matconvnet/pretrained/
 
