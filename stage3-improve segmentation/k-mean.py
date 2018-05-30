@@ -115,6 +115,7 @@ ax.set_title('SLIC')
 #ax[1, 1].imshow(mark_boundaries(img, segments_watershed))
 #ax[1, 1].set_title('Compact watershed')
 
+
 #for a in ax.ravel():
     #a.set_axis_off()
 
@@ -181,7 +182,9 @@ for i in range(count_points):
     elif(l_y+crop_y >1536):
         l_y =1536-15
     all_image[i,:,:,:] = image[l_y-15:l_y+15,l_x-15:l_x+15]
-
+#%%
+raw_txt_files = glob.glob("./2012new/*.txt")
+for txt_name in raw_txt_files:
 
 
 
