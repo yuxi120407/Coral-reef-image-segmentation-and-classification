@@ -121,6 +121,66 @@ ax.set_title('SLIC')
 plt.tight_layout()
 plt.show()
 
+#%%
+def generate_sample(original_label,label,size):
+    a = np.where(segments_slic==label)
+    a_y = a[0]
+    a_x = a[1]
+    num_dime = a_x.shape[0]
+    f = np.random.randint(num_dime, size=size)
+    corrdinate_x = np.zeros(size)
+    corrdinate_y = np.zeros(size)
+    for i,j in enumerate (f):
+        corrdinate_x[i] = a_x[j]
+        corrdinate_y[i] = a_y[j]
+        writ = open("./201208172_T-12-58-58_Dive_01_041.txt","a") #writ is a file object for write
+        x = int(corrdinate_x[i])
+        y = int(corrdinate_y[i])
+        label = original_label
+        writ.write('{0},{1},{2}\n'.format(x,y,label))
+        writ.close()
+#%%
+count_points = 50
+path_txt = "./2012new/201208172_T-12-58-58_Dive_01_041.txt"
+txtfile = open(path_txt)
+lines = txtfile.readlines()[2:52]
+for i in range(count_points):
+    line_piece = lines[i]
+    list_element = line_piece.split(',')
+    l_x = int(list_element[0])
+    l_y = int(list_element[1])
+    original_label = int(list_element[2])
+    label = segments_slic[l_y,l_x]
+    generate_sample(original_label,label,10)
+txtfile.close()
+#%%
+path_txt = "./201208172_T-12-58-58_Dive_01_041.txt"
+txt_file = open(path_txt)
+text = txt_file.readlines()[2:]
+
+#%%
+path_image = "./201208172_T-12-58-58_Dive_01_041.jpg"
+count_points = 500
+crop_length = 30
+crop_width = 30
+all_image = np.zeros([count_points,crop_length,crop_width,3],dtype=np.uint8)
+crop_x = int(crop_length/2)
+crop_y = int(crop_width/2)
+image = imread(path_image)
+for i in range(count_points):
+    text_piece = text[i]
+    text_element = text_piece.split(',')
+    l_x = int(text_element[0])
+    l_y = int(text_element[1])
+    if(l_x-crop_x <0):
+        l_x = crop_x
+    elif(l_y-crop_y <0):
+        l_y = crop_y
+    elif(l_x+crop_x >2048):
+        l_x = 2048-15
+    elif(l_y+crop_y >1536):
+        l_y =1536-15
+    all_image[i,:,:,:] = image[l_y-15:l_y+15,l_x-15:l_x+15]
 
 
 
