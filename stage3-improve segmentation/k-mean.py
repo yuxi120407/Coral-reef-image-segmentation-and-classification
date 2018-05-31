@@ -182,7 +182,7 @@ for i in range(count_points):
     elif(l_y+crop_y >1536):
         l_y =1536-15
     all_image[i,:,:,:] = image[l_y-15:l_y+15,l_x-15:l_x+15]
-#%%
+#%%generate new augmentation txt files
 count_points = 50
 raw_txt_files = glob.glob("./2012new/*.txt")
 for txt_name in raw_txt_files:
