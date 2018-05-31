@@ -183,8 +183,20 @@ for i in range(count_points):
         l_y =1536-15
     all_image[i,:,:,:] = image[l_y-15:l_y+15,l_x-15:l_x+15]
 #%%
+count_points = 50
 raw_txt_files = glob.glob("./2012new/*.txt")
 for txt_name in raw_txt_files:
+     txt_file = open(txt_name)
+     text = txt_file.readlines()[2:]
+     for i in range(count_points): 
+        line_piece = text[i]
+        list_element = line_piece.split(',')
+        l_x = int(list_element[0])
+        l_y = int(list_element[1])
+        original_label = int(list_element[2])
+        label = segments_slic[l_y,l_x]
+        generate_sample(original_label,label,10,txt_name)
+     txt_file.close()
 
 
 
