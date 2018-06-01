@@ -59,10 +59,8 @@ def newtxt(path_txt,path_image,crop_length,crop_width):
         label_encode[m] = 3
     elif (new_l=="Ana"):
         label_encode[m] = 4 
-    elif (new_l=="Tws"):
-        label_encode[m] = 5
     else:
-        label_encode[m] = 6
+        label_encode[m] = 5
     txtfile.close()
     name_image = path_image.split("/")[2] 
     name_txt = name_image.split(".")[0]
