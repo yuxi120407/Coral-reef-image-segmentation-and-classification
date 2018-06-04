@@ -257,8 +257,27 @@ for name in txt_name:
     #print("Image {0} finished ".format(count))
     print(("Image %d finished in %f seconds ---" % (count,(time.time()-start_time))))
     count = count+1
-
-
+#%%
+#%%
+image_path = "201208172_T-12-58-25_Dive_01_040"
+count_points = 50
+path_txt = str('./2012new - No_augmentation/')+image_path+str('.txt')
+path_image = str('./2012image/')+image_path+str('.jpg')
+img = imread(path_image)
+img = img_as_float(img)
+segments_slic = slic(img, n_segments=50, compactness=15, sigma=1)
+txtfile = open(path_txt)
+lines = txtfile.readlines()[2:52]
+label = np.zeros(50)
+original_label = np.zeros(50)
+for i in range(count_points):
+    line_piece = lines[i]
+    list_element = line_piece.split(',')
+    l_x = int(list_element[0])
+    l_y = int(list_element[1])
+    original_label[i] = int(list_element[2])
+    label[i] = segments_slic[l_y,l_x]
+txtfile.close()
 
 
 
