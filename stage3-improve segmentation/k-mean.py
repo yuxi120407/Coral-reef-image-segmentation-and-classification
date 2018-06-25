@@ -36,14 +36,15 @@ from skimage.segmentation import felzenszwalb, slic, quickshift, watershed
 from skimage.segmentation import mark_boundaries,find_boundaries
 from skimage.util import img_as_float
 #%%
-path_image = "./2012image/201208172_T-12-50-10_Dive_01_025.jpg"
+#path_image = "./2012image/201208172_T-12-50-10_Dive_01_025.jpg"
+path_image = "./201208172_T-12-58-58_Dive_01_041.jpg"
 #img = img_as_float(astronaut()[::2, ::2])
 img = imread(path_image)
 img = img_as_float(img)
 #%%image segmentation with k-means(step1)
 
 #segments_fz = felzenszwalb(img, scale=100, sigma=0.5, min_size=50)
-segments_slic = slic(img, n_segments=100, compactness=10, sigma=1)
+segments_slic = slic(img, n_segments=300, compactness=10, sigma=1)
 #segments_quick = quickshift(img, kernel_size=3, max_dist=6, ratio=0.5)
 #gradient = sobel(rgb2gray(img))
 #segments_watershed = watershed(gradient, markers=250, compactness=0.001)
@@ -56,7 +57,7 @@ fig, ax = plt.subplots(1, 1, figsize=(10,10), sharex=True, sharey=True)
 
 #ax[0, 0].imshow(mark_boundaries(img, segments_fz))
 #ax[0, 0].set_title("Felzenszwalbs's method")
-ax.imshow(mark_boundaries(img, segments_slic,color=(1,1,0)))
+ax.imshow(mark_boundaries(img, segments_slic,color=(0,0,0)))
 ax.set_title('SLIC')
 #ax[1, 0].imshow(mark_boundaries(img, segments_quick))
 #ax[1, 0].set_title('Quickshift')
@@ -99,81 +100,6 @@ def mark_generate_point(x,y,label):
     if (label == 5):#Others
         plt.plot(x,y,'m^')
     plt.axis('off')
-#%%drew points in the images
-#fig, ax = plt.subplots(1, 1, figsize=(10,10), sharex=True, sharey=True)
-#ax.imshow(mark_boundaries(img, segments_slic,color=(1,1,0)))
-##mark_point(1530,35,2)
-##plt.plot(300,300,c='rx')
-#
-#
-#
-#count_points = 50
-#geneate_count_points = 500
-#path_txt = "./2012new/201208172_T-12-50-10_Dive_01_025.txt"
-#txtfile = open(path_txt)
-#all_lines = txtfile.readlines()[2:]
-#lines = all_lines[0:50]
-#generate_lines = all_lines[50:]
-#for i in range(count_points):
-#    line_piece = lines[i]
-#    list_element = line_piece.split(',')
-#    l_x = int(list_element[0])
-#    l_y = int(list_element[1])
-#    original_label = int(list_element[2])
-#    mark_point(l_x,l_y,original_label)
-#for j in range(geneate_count_points):
-#    line_piece = generate_lines[j]
-#    list_element = line_piece.split(',')
-#    l_x = int(list_element[0])
-#    l_y = int(list_element[1])
-#    original_label = int(list_element[2])
-#    mark_generate_point(l_x,l_y,original_label)    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #%%generate samples: generate 10 points for each original points
@@ -252,7 +178,7 @@ for txt_name in raw_txt_files:
     text = txt_file.readlines()[2:]
     img = imread(path_image)
     img = img_as_float(img)
-    segments_slic = slic(img, n_segments=100, compactness=0.1, sigma=5)
+    segments_slic = slic(img, n_segments=300, compactness=0.1, sigma=5)
      
     for i in range(count_points): 
        line_piece = text[i]
@@ -269,28 +195,28 @@ for txt_name in raw_txt_files:
 #%%transfer the image into four dimentation data
 all_label = np.zeros(1)
 image_data = np.zeros([1,30,30,3],dtype=np.uint8)
-read_files = glob.glob("./2012new/*.txt")
+read_files = glob.glob("./2012new - No_augmentation(m=300)/*.txt")
 for name in read_files:
     name = name.split("\\")[1]
     name = name.split(".")[0]
-    path_txt = str('./2012new - No_augmentation(m=50)/')+name+str('.txt')
+    path_txt = str('./2012new - No_augmentation(m=300)/')+name+str('.txt')
     path_image = str('./2012image/')+name+str('.jpg')
     new_image_data,label = generate_signal_imagedata(path_txt,path_image)
     all_label = np.hstack((all_label,label))
     image_data = np.vstack((image_data,new_image_data))
 final_data = image_data[1:,:,:,:]
 final_label = all_label[1:]
-data = final_data.reshape(-1,2700)
-final_data,final_label = shuffle(data,final_label)
+#data = final_data.reshape(-1,2700)
+#final_data,final_label = shuffle(data,final_label)
 #%%
 def drew_label_points(image_name):
     #image_name = str()
     path_image = str('./2012image/')+image_name+str('.jpg')
-    path_txt = str('./2012new - No_augmentation/')+image_name+str('.txt')
+    path_txt = str('./2012new - No_augmentation(m=300)/')+image_name+str('.txt')
     print("find points by using k-means... ")
     img = imread(path_image)
     img = img_as_float(img)
-    segments_slic = slic(img, n_segments=100, compactness=10, sigma=1)
+    segments_slic = slic(img, n_segments=300, compactness=20, sigma=1)
     print("k-means done")
     print("generate 10 points for each label...")
     count_points = 50
@@ -320,7 +246,7 @@ def drew_label_points(image_name):
         l_y = int(list_element[1])
         original_label = int(list_element[2])
         mark_point(l_x,l_y,original_label)
-    plt.savefig('./2012-test-image/'+image_name+'original_points.png',bbox_inches='tight')
+    plt.savefig('./2012-test-image-m=300/'+image_name+'original_points.png',bbox_inches='tight')
     
     for j in range(geneate_count_points):
         line_piece = generate_lines[j]
@@ -329,13 +255,13 @@ def drew_label_points(image_name):
         l_y = int(list_element[1])
         original_label = int(list_element[2])
         mark_generate_point(l_x,l_y,original_label)   
-    plt.savefig('./2012-test-image/'+image_name+'generate_points.png',bbox_inches='tight')
+    plt.savefig('./2012-test-image-m=300/'+image_name+'generate_points.png',bbox_inches='tight')
     plt.close(fig)
 #%%
 image_count = 120
 count = 1
 txt_name = glob.glob("./2012new/*.txt")
-for name in txt_name[24:]:
+for name in txt_name[0:24]:
     image_name = name.split("\\")[1]
     image_name = image_name.split(".")[0]
     print("Image {0} is processing ".format(count))
@@ -345,7 +271,7 @@ for name in txt_name[24:]:
     print(("Image %d finished in %f seconds ---" % (count,(time.time()-start_time))))
     count = count+1
 #%%
-name = "./2012new\\201208172_T-12-58-25_Dive_01_040.txt"
+name = "./2012new\\201208172_T-13-22-18_Dive_01_070.txt"
 image_name = name.split("\\")[1]
 image_name = image_name.split(".")[0]
 print("Image {0} is processing ".format(count))
@@ -354,3 +280,53 @@ drew_label_points(image_name)
 #print("Image {0} finished ".format(count))
 print(("Image %d finished in %f seconds ---" % (count,(time.time()-start_time))))
 count = count+1
+#%%
+image_name = "201308203-T-16-17-15_008 "
+path_txt = "./2013new/" + str(image_name) + ".txt"
+path_image = "./2013-image/" + str(image_name) +".jpg"
+#img = img_as_float(astronaut()[::2, ::2])
+img = imread(path_image)
+img = img_as_float(img)
+segments_slic = slic(img, n_segments=300, compactness=25, sigma=1)
+#%%
+count_points = 50
+txtfile = open(path_txt)
+all_lines = txtfile.readlines()[2:]
+lines = all_lines[0:50]
+fig, ax = plt.subplots(1, 1, figsize=(10,10), sharex=True, sharey=True)
+ax.imshow(mark_boundaries(img, segments_slic,color=(1,1,0)))
+#ax.imshow(img)
+for i in range(count_points):
+    line_piece = lines[i]
+    list_element = line_piece.split(',')
+    l_x = int(list_element[0])
+    l_y = int(list_element[1])
+    original_label = int(list_element[2])
+    mark_point(l_x,l_y,original_label)
+
+#%%combine the 2013image data
+final_data = np.vstack((final_data,x))
+final_label = np.hstack ((final_label,y))
+#%%
+#final_data,final_label = shuffle(final_data,final_label)
+shuffle_data = final_data.reshape(-1,2700)
+shuffle_data,shuffle_label = shuffle(shuffle_data,final_label)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
