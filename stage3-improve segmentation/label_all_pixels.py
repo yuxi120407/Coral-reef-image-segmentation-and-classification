@@ -6,6 +6,7 @@ Created on Sat Jun 16 14:16:48 2018
 """
 
 # import the necessary packages
+import keras
 from skimage.segmentation import slic
 from skimage.data import astronaut
 import matplotlib.pyplot as plt
@@ -61,8 +62,9 @@ for i in range(count_points):
         label_image[i,j]=original_label+1
 plt.imshow(label_image)    
 txtfile.close()
-
-
+#%%
+label_image = label_image.reshape(1,1536,2048)
+label_image_onehot = keras.utils.to_categorical(label_image, 7)
 
 
 
