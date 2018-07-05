@@ -1,4 +1,4 @@
-Coral image segmentation and classification
+##Coral image segmentation and classification
 
 Step1:install the dependence in the terminal:
 pip install tensorflow
