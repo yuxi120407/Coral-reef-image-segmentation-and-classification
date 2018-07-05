@@ -27,4 +27,4 @@ saved in the "result_image" file.
 "model_weight" contains the weights which we have already trained
 "result_image" contains the result of the image segmentation
 "test" contains the image you want to test
-"test_image" contains all the 2012images #Demo
+"test_image" contains all the 2012images 
