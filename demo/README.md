@@ -1,7 +1,8 @@
 ## Coral image segmentation and classification
 
 ### Step1: install the dependence in the terminal:
-pip install tensorflow. 
+pip install tensorflow.
+
 pip install keras.
 
 ### Step2: generate data with K-means
