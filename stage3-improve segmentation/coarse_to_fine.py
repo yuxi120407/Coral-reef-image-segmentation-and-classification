@@ -36,7 +36,6 @@ def percent_coral(testimage):
 #%%test the image
 def test_img_loc(img,model):
     windowsize_r = 30
-    windowsize_r = 30
     windowsize_c = 30
     count = 0
     #test_image = img_new
@@ -71,6 +70,7 @@ def test_img_loc(img,model):
     print(("---image%d finished in %s seconds ---" % (count,(time.time()-start_time))))
     plt.imshow(testimage)
     plt.axis('off')
+    plt.savefig('35.pdf')
     return loc_x,loc_y
 #%%
 def test_img_label(img,model,img_label):
@@ -102,8 +102,9 @@ def test_img_label(img,model,img_label):
     percent = percent_coral(testimage)
     print(("---image%d finished in %s seconds ---" % (count,(time.time()-start_time))))
     print("there are {0}% coral in this image".format(percent))
-    plt.imshow(testimage)    
+    plt.imshow(testimage)
     plt.axis('off')
+    testimage.save('./New folder/result'+str(percent)+'.pdf')    
 #%%
 #get the area of the original image
 def get_back_img(img,center,dis,factor):
@@ -142,10 +143,10 @@ def plot_rectangle(draw,area_x1,area_x2,area_y1,area_y2):
 #%%#%%load coarse model and weight
 model = cnn_model()
 model.summary()
-model.load_weights('./model_weight/2018_10_14_weight1.5.h5')
+model.load_weights('./model_weight/2018_10_14_weight0.2.h5')
 #%%
 #step1 downsample image
-path_image = "./2012image/201208172_T-12-56-18_Dive_01_036.jpg"
+path_image = "./2012image/201208172_T-12-54-11_Dive_01_032.jpg"
 img = imread(path_image)
 k = img[0:1536:3,0:2048:3,:]
 plt.imshow(k)
@@ -164,7 +165,7 @@ for i in range(size):
     _,area_x1,area_x2,area_y1,area_y2 = get_back_img(img,coral_loc[i,:],20,3)
     image_label[area_x1:area_x2,area_y1:area_y2] = 1
     plot_rectangle(draw,area_x1,area_x2,area_y1,area_y2)
-im.save('test7.jpg')   
+im.save('test11.pdf')   
 plt.imshow(image_label,cmap='Greys_r')
 plt.axis('off') 
 #%%
@@ -175,10 +176,13 @@ detail_model.load_weights('./model_weight/2012images-areas-7.5-50epoch.h5')
 test_img_label(img,detail_model,image_label)
 
 
+#%%
 
-
-
-
+path_image = "./2012image/201208172_T-12-56-18_Dive_01_036.jpg"
+img = imread(path_image)
+plt.imshow(img)
+plt.axis('off')
+plt.savefig('36.pdf')
 
 
 
