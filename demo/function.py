@@ -243,8 +243,6 @@ def cnn_model1():
     model.add(Activation('softmax'))
     return model
 
-#%%
-#original_data,original_label = newimagedata(30,30)
 
 
 
