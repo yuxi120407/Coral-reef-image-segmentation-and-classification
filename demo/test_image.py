@@ -50,7 +50,7 @@ for name in raw_image_files:
     for r in range(0,test_image.shape[0] - windowsize_r+1, 6):
         for c in range(0,test_image.shape[1] - windowsize_c+1, 6):
             window = test_image[r:r+windowsize_r,c:c+windowsize_c]
-            window = window.reshape(-1,30,30,3)
+            window = window.reshape(-1,30,30,3)/255
             pred = model.predict(window,verbose=2)
             y_pred = np.argmax(pred,axis=1)
             if(y_pred==0):#coral---blue
