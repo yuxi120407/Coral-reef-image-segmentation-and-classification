@@ -231,26 +231,3 @@ print("Image {0} is processing ".format(count))
 start_time = time.time()
 drew_label_points(image_name)
 print(("Image %d finished in %f seconds ---" % (count,(time.time()-start_time))))
-#%%
-hsv_data = np.zeros((66000,30,30,3))
-for i in range(66000):
-    hsv_data[i]= color.rgb2lab(final_data[i])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
