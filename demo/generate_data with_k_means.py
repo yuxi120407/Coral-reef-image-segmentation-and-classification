@@ -132,7 +132,7 @@ for txt_name in raw_txt_files:
     text = txt_file.readlines()[2:]
     img = imread(path_image)
     img = img_as_float(img)
-    #quantize the image with k-mean
+    #quantize the image with SLIC algorithm
     segments_slic = slic(img, n_segments=300, compactness=0.1, sigma=5)
     for i in range(count_points): 
        line_piece = text[i]
