@@ -94,12 +94,6 @@ def newtxt(path_txt,path_image,crop_length,crop_width):
         all_image[i,:,:,:] = image[corrdinate[i,1]-crop_y:corrdinate[i,1]+crop_y,corrdinate[i,0]-crop_x:corrdinate[i,0]+crop_x]
     return all_image, label_encode
 #%%
-
-
-
-
-
-#%%
 def newimagedata(crop_length,crop_width):
     all_label = np.zeros(1)
     image_data = np.zeros([1,crop_length,crop_width,3],dtype=np.uint8)
