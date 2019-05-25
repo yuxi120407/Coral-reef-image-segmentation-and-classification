@@ -14,4 +14,4 @@ the result of Result_Vs_Ground truth will be saved in '50point_Result'.
 
 All the function finished except for laser point detection.
 
-![image](https://github.com/yuxi120407/Coral-reef-image-segmentation-and-classification/GUI_python/raw/master/gui_figure1.png)
+![image](https://github.com/yuxi120407/Coral-reef-image-segmentation-and-classification/GUI_python/gui_figure1.png)
