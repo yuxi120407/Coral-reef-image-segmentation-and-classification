@@ -181,14 +181,6 @@ torch.manual_seed(args.seed)
 device = torch.device("cuda" if use_cuda else "cpu")
 
 kwargs = {'num_workers': 1, 'pin_memory': True} if use_cuda else {}
-#load trian and test dataset
-#    train_loader = torch.utils.data.DataLoader(
-#        datasets.MNIST('../data', train=True, download=True,
-#                       transform=transforms.Compose([
-#                           transforms.ToTensor(),
-#                           transforms.Normalize((0.1307,), (0.3081,))
-#                       ])),
-#        batch_size=args.batch_size, shuffle=True, **kwargs)
 
 #%%
 data_2012_imagefloder_name = '2012image'
@@ -219,12 +211,7 @@ train_dataset = TensorDataset(x_train,y_train)
 train_loader = torch.utils.data.DataLoader(dataset = train_dataset,
                                            batch_size = args.batch_size,
                                            shuffle = True, **kwargs)
-#    test_loader = torch.utils.data.DataLoader(
-#        datasets.MNIST('../data', train=False, transform=transforms.Compose([
-#                           transforms.ToTensor(),
-#                           transforms.Normalize((0.1307,), (0.3081,))
-#                       ])),
-#        batch_size=args.test_batch_size, shuffle=True, **kwargs)
+
 test_dataset = TensorDataset(x_test,y_test)
 test_loader = torch.utils.data.DataLoader(dataset = test_dataset,
                                           batch_size = args.batch_size,
